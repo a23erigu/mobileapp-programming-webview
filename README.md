@@ -33,7 +33,9 @@ function errorCallback(error) {
 
 Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
+![](ExternalWebPage)
+
+![](InternalWebPage)
 
 Läs gärna:
 
