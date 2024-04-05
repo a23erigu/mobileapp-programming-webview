@@ -15,30 +15,77 @@ _Du kan ta bort all text som finns sedan tidigare_.
 
 Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
 
+Detta lades till i AndroidManifest.xml för att göra så appen kunde nå internet.
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+Jag skapade en WebView i activity_main.xml och gav den TheWebView som id.
+```
+<WebView
+        android:id="@+id/TheWebView"
+        android:layout_width="409dp"
+        android:layout_height="326dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="190dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="1.0" />
+```
+
+I MainActivity.java skapades en WebView, WebViewClient och WebSettings.
+```
+private WebView myWebView;
+private WebViewClient myWebViewCliente;
+private WebSettings webSettings; 
+```
+
+I onCreate säts myWebView till WebViewn som hade skapats, myWebViewCliente sates som WebViewClient på myWebView 
+och JavaScript activeras på myWebView. 
+```
+myWebView = findViewById(R.id.TheWebView);
+myWebViewCliente = new WebViewClient();
+myWebView.setWebViewClient(myWebViewCliente);
+
+webSettings = myWebView.getSettings();
+webSettings.setJavaScriptEnabled(true);
+```
+
+Till showExternalWebPage och showInternalWebPage lades det till vilka url som skule ladas när de aktiverades.
+```
+public void showExternalWebPage(){
+        // TODO: Add your code for showing external web page here
+        myWebView.loadUrl("https://www.google.com/");
+}
+
+public void showInternalWebPage(){
+        // TODO: Add your code for showing internal web page here
+        myWebView.loadUrl("https://www.bing.com/");
 }
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+Tillsist så lades det till så att showExternalWebPage och showInternalWebPage kördes när korekt knap tryktes.
+```
+if (id == R.id.action_external_web) {
+        Log.d("==>","Will display external web page");
+        showExternalWebPage();
+        return true;
+}
 
-![](ExternalWebPage)
+if (id == R.id.action_internal_web) {
+        Log.d("==>","Will display internal web page");
+        showInternalWebPage();
+        return true;
+}
+```
+Bilderna av appen
 
-![](InternalWebPage)
+![](ExternalWebPage.png)
 
-Läs gärna:
-
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+![](InternalWebPage.png)
