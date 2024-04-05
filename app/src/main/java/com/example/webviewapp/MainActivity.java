@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,13 +20,19 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Add your code for showing internal web page here
     }
 
+    private WebView myWebView;
+    private WebViewClient myWebViewCliente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        myWebView = findViewById(R.id.TheWebView);
+        myWebViewCliente = new WebViewClient();
+        myWebView.setWebViewClient(myWebViewCliente);
+        
         /*
         * Rename your App. Tip: Values->Strings
         * Enable Internet access for your App. Tip: Manifest
