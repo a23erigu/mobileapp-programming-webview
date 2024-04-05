@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private WebView myWebView;
     private WebViewClient myWebViewCliente;
+    private WebSettings webSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
         myWebView = findViewById(R.id.TheWebView);
         myWebViewCliente = new WebViewClient();
         myWebView.setWebViewClient(myWebViewCliente);
-        
+
+        webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        myWebView.loadUrl("https://www.google.com/");
+
         /*
         * Rename your App. Tip: Values->Strings
         * Enable Internet access for your App. Tip: Manifest
@@ -49,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         -- Commit and push to your github fork
         * Move the code that loads a URL into your WebView into the two methods
           "showExternalWebPage()" and "showInternalWebPage()".
-        * Call the "showExternalWebPage()" / "showInternalWebPage()" methods
+        * Call the "showExternalWebPage()" /
+        * "showInternalWebPage()" methods
           when you select menu options "External Web Page" or "Internal Web Page"
           respectively
         -- Commit and push to your github fork
