@@ -43,16 +43,17 @@ webSettings = myWebView.getSettings();
 webSettings.setJavaScriptEnabled(true);
 ```
 
-Till showExternalWebPage och showInternalWebPage lades det till vilka url som skule ladas när de aktiverades.
+Till showExternalWebPage lades det till vilken url som skule ladas när de aktiverades.
 ```
 public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
         myWebView.loadUrl("https://www.google.com/");
 }
+```
 
+Till showInternalWebPage så skapades en html som heter InternalWebPage.html som används som url
+```
 public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
-        myWebView.loadUrl("https://www.bing.com/");
+        myWebView.loadUrl("file:///android_asset/InternalWebPage.html");
 }
 ```
 
