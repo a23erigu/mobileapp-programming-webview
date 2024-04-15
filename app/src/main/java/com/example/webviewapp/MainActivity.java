@@ -14,13 +14,11 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
         myWebView.loadUrl("https://www.google.com/");
     }
 
     public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
-        myWebView.loadUrl("https://www.bing.com/");
+        myWebView.loadUrl("file:///android_asset/InternalWebPage.html");
     }
 
     private WebView myWebView;
